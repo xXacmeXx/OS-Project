@@ -7,10 +7,12 @@
 
 // ساختار برای هر محصول در لیست خرید
 typedef struct {
-    char product_name[256];
-    int quantity;
+    char product_name[256]; // نام محصول
+    double price;           // قیمت محصول
+    double score;           // امتیاز محصول
+    int entity;             // تعداد موجودی
+    char last_modified[30]; // تاریخ آخرین تغییر
 } ShoppingItem;
-
 // ساختار برای اطلاعات کاربر
 typedef struct {
     char name[256];
@@ -48,12 +50,12 @@ int main() {
 
             // اضافه کردن محصول جدید
             char product_name[256];
-            int quantity;
-            if (sscanf(input, "%s %d", product_name, &quantity) == 2) {
+            int entity;
+            if (sscanf(input, "%s %d", product_name, &entity) == 2) {
                 user_info.item_count++;
                 user_info.shopping_list = realloc(user_info.shopping_list, user_info.item_count * sizeof(ShoppingItem));
                 strcpy(user_info.shopping_list[user_info.item_count - 1].product_name, product_name);
-                user_info.shopping_list[user_info.item_count - 1].quantity = quantity;
+                user_info.shopping_list[user_info.item_count - 1].entity = entity;
             } else {
                 printf("Invalid format. Please enter in the format: Product Quantity\n");
             }
